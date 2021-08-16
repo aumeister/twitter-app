@@ -47,6 +47,7 @@ export default function Share() {
         console.log(newPost)
         try {
             await axios.post('/posts', newPost);
+            window.location.reload();
         } catch (err) {
 
         }
