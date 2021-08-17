@@ -31,7 +31,7 @@ const Topbar = () => {
 						className="topbarImg"
 					></img>
 				</Link>
-				<div title="Exit profile" className="topbarExit" onClick={exitProfile}>
+				<div title="Log out" className="topbarExit" onClick={exitProfile}>
 					<ExitToApp></ExitToApp>
 				</div>
 			</div>

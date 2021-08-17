@@ -1,5 +1,6 @@
 import "./sidebar.css";
 import { RssFeed, Bookmarks, Group, Chat } from "@material-ui/icons";
+import { Link } from "react-router-dom";
 
 export default function Sidebar() {
 	return (
@@ -18,10 +19,15 @@ export default function Sidebar() {
 						<Group></Group>
 						<span className="sidebarListItemText">Group</span>
 					</li>
-					<li className="sidebarListItem">
-						<Chat></Chat>
-						<span className="sidebarListItemText">Chat</span>
-					</li>
+					<Link
+						style={{ textDecoration: "none", color: "#000" }}
+						to={"/messenger"}
+					>
+						<li className="sidebarListItem">
+							<Chat></Chat>
+							<span className="sidebarListItemText">Chat</span>
+						</li>
+					</Link>
 				</ul>
 				<hr className="sidebarHr"></hr>
 			</div>

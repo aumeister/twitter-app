@@ -10,9 +10,8 @@ export default function Rightbar({ user }) {
 	const { user: currentUser, dispatch } = useContext(AuthContext);
 	const [followers, setFollowers] = useState([]);
 	const [followed, setFollowed] = useState(
-		currentUser.followings.includes(user?.id)
+		currentUser.followings.includes(user?._id)
 	);
-
 	useEffect(() => {
 		const getFollowers = async () => {
 			try {
@@ -24,7 +23,6 @@ export default function Rightbar({ user }) {
 		};
 		getFollowers();
 	}, [user]);
-
 	const handleClick = async () => {
 		try {
 			if (followed) {
