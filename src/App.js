@@ -3,35 +3,34 @@ import Login from "./pages/login/Login";
 import Profile from "./pages/profile/Profile";
 import Register from "./pages/register/Register";
 import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect
+	BrowserRouter as Router,
+	Switch,
+	Route,
+	Redirect,
 } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 
 function App() {
-
-  const { user } = useContext(AuthContext)
-  return (
-    <Router>
-      <Switch>
-        <Route exact path='/'>
-          {user ? <Home></Home> : <Register></Register>}
-        </Route>
-        <Route path='/login'>
-          {user ? <Redirect to='/'></Redirect> : <Login></Login>}
-        </Route>
-        <Route path='/register'>
-          {user ? <Redirect to='/'></Redirect> : <Register></Register>}
-        </Route>
-        <Route path='/profile/:username'>
-          <Profile></Profile>
-        </Route>
-      </Switch>
-    </Router>
-  )
+	const { user } = useContext(AuthContext);
+	return (
+		<Router>
+			<Switch>
+				<Route exact path="/">
+					{user ? <Home></Home> : <Login></Login>}
+				</Route>
+				<Route path="/login">
+					{user ? <Redirect to="/"></Redirect> : <Login></Login>}
+				</Route>
+				<Route path="/register">
+					{user ? <Redirect to="/"></Redirect> : <Register></Register>}
+				</Route>
+				<Route path="/profile/:username">
+					<Profile></Profile>
+				</Route>
+			</Switch>
+		</Router>
+	);
 }
 
 export default App;

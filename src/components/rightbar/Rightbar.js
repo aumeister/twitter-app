@@ -67,7 +67,7 @@ export default function Rightbar({ user }) {
 		return (
 			<>
 				{user.username !== currentUser.username && (
-					<button className="rightbarFollowButton" on onClick={handleClick}>
+					<button className="rightbarFollowButton" onClick={handleClick}>
 						{followed ? "Unfollow" : "Follow"}
 						{followed ? <Remove></Remove> : <Add></Add>}
 					</button>
@@ -87,6 +87,7 @@ export default function Rightbar({ user }) {
 				<div className="rightbarFollowings">
 					{followers.map((follower) => (
 						<Link
+							key={follower._id}
 							style={{ textDecoration: "none" }}
 							to={"/profile/" + follower.username}
 						>

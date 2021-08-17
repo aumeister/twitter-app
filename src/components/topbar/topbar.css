@@ -81,3 +81,6 @@
 	object-fit: cover;
 	cursor: pointer;
 }
+.topbarExit {
+	margin-left: 10px;
+}

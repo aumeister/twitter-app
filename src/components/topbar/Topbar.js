@@ -1,11 +1,15 @@
 import "./topbar.css";
-import { Search } from "@material-ui/icons";
+import { Search, ExitToApp } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../context/AuthContext";
 const Topbar = () => {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	const { user } = useContext(AuthContext);
+	const exitProfile = () => {
+		localStorage.setItem("user", null);
+		window.location.reload();
+	};
 	return (
 		<div className="topbarContainer">
 			<div className="topbarLeft">
@@ -27,6 +31,9 @@ const Topbar = () => {
 						className="topbarImg"
 					></img>
 				</Link>
+				<div title="Exit profile" className="topbarExit" onClick={exitProfile}>
+					<ExitToApp></ExitToApp>
+				</div>
 			</div>
 		</div>
 	);
