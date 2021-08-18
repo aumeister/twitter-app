@@ -3,7 +3,7 @@ import { useEffect, useState, useContext } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthContext";
-import { Add, Remove } from "@material-ui/icons";
+import { Add, Remove, ChatBubble } from "@material-ui/icons";
 
 export default function Rightbar({ user }) {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
@@ -37,7 +37,20 @@ export default function Rightbar({ user }) {
 				dispatch({ type: "FOLLOW", payload: user._id });
 			}
 			setFollowed(!followed);
-		} catch (err) {}
+		} catch (err) {
+			console.log(err);
+		}
+	};
+
+	const startConversation = async () => {
+		try {
+			await axios.post("http://localhost:8080/api/conversations/", {
+				senderId: currentUser._id,
+				recieverId: user._id,
+			});
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	const HomeRightbar = () => {
@@ -68,6 +81,15 @@ export default function Rightbar({ user }) {
 					<button className="rightbarFollowButton" onClick={handleClick}>
 						{followed ? "Unfollow" : "Follow"}
 						{followed ? <Remove></Remove> : <Add></Add>}
+					</button>
+				)}
+				{user.username !== currentUser.username && (
+					<button
+						className="rightbarFollowButton"
+						title="Start conversation"
+						onClick={startConversation}
+					>
+						<ChatBubble></ChatBubble>
 					</button>
 				)}
 				<h4 className="rightbarTitle">User information title</h4>

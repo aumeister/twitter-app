@@ -7,7 +7,7 @@ const Topbar = () => {
 	const PF = process.env.REACT_APP_PUBLIC_FOLDER;
 	const { user } = useContext(AuthContext);
 	const exitProfile = () => {
-		localStorage.setItem("user", null);
+		localStorage.clear();
 		window.location.reload();
 	};
 	return (
