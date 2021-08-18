@@ -60,3 +60,14 @@
 	background-color: teal;
 	color: #fff;
 }
+.noConversationText {
+	display: flex;
+	height: 100%;
+	justify-content: center;
+	align-items: center;
+	font-size: 50px;
+	font-weight: 300;
+	color: gray;
+	cursor: inherit;
+	user-select: none;
+}
