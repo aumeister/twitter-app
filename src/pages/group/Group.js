@@ -1,6 +1,6 @@
-import "./messenger.css";
+import "./group.css";
 import Topbar from "../../components/topbar/Topbar";
-import Conversation from "../../components/conversations/Conversation";
+import Group from "../../components/group/Group";
 import Message from "../../components/message/Message";
 import { useContext, useState, useEffect, useRef } from "react";
 import { AuthContext } from "../../context/AuthContext";
@@ -8,7 +8,7 @@ import axios from "axios";
 import { io } from "socket.io-client";
 
 export default function Messenger() {
-	const [conversations, setConversations] = useState([]);
+	const [groups, setGroups] = useState([{}]);
 	const [currentChat, setCurrentChat] = useState(null);
 	const [messages, setMessages] = useState([]);
 	const [newMessage, setNewMessage] = useState("");
@@ -19,7 +19,7 @@ export default function Messenger() {
 
 	useEffect(() => {
 		socket.current = io("ws://localhost:8900");
-		socket.current.on("getMessage", (data) => {
+		socket.current.on("getGroupMessage", (data) => {
 			setArrivalMessage({
 				sender: data.senderId,
 				text: data.text,
@@ -27,7 +27,6 @@ export default function Messenger() {
 			});
 		});
 	}, []);
-
 	useEffect(() => {
 		arrivalMessage &&
 			currentChat?.members.includes(arrivalMessage.sender) &&
@@ -39,17 +38,16 @@ export default function Messenger() {
 	}, [user]);
 
 	useEffect(() => {
-		const getConversations = async () => {
+		const getGroups = async () => {
 			try {
-				const res = await axios.get("/conversations/" + user?._id);
-				setConversations(res.data);
+				const res = await axios.get("/group/" + user?._id);
+				setGroups(res.data);
 			} catch (err) {
 				console.log(err);
 			}
 		};
-		getConversations();
+		getGroups();
 	}, [user?._id]);
-
 	useEffect(() => {
 		const getMessages = async () => {
 			try {
@@ -61,7 +59,29 @@ export default function Messenger() {
 		};
 		getMessages();
 	}, [currentChat?._id]);
-
+	const createGroup = async () => {
+		try {
+			const groupName = prompt("Your group name?", "");
+			await axios.post("/group", {
+				senderId: user._id,
+				groupName: groupName,
+			});
+			window.location.reload();
+		} catch (err) {
+			console.log(err);
+		}
+	};
+	const joinGroup = async () => {
+		try {
+			const groupName = prompt("Group you want to join?", "");
+			await axios.post("/group/add/" + user._id, {
+				groupName: groupName,
+			});
+			window.location.reload();
+		} catch (err) {
+			console.log(err);
+		}
+	};
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		const message = {
@@ -69,14 +89,10 @@ export default function Messenger() {
 			text: newMessage,
 			coversationId: currentChat._id,
 		};
-		const recieverId = currentChat.members.find(
-			(member) => member !== user._id
-		);
-
-		socket.current.emit("sendMessage", {
-			senderId: user._id,
-			recieverId,
+		socket.current.emit("sendGroupMessage", {
+			sender: user._id,
 			text: newMessage,
+			group: currentChat,
 		});
 		try {
 			const res = await axios.post("/messages", message);
@@ -98,13 +114,19 @@ export default function Messenger() {
 			<div className="messenger">
 				<div className="chatMenu">
 					<div className="chatMenuWrapper">
-						{conversations.map((conv) => (
-							<div key={conv._id} onClick={() => setCurrentChat(conv)}>
-								<Conversation
-									key={conv._id}
-									currentUser={user}
-									conversation={conv}
-								></Conversation>
+						<button className="createGroup" onClick={createGroup}>
+							Create a chat room
+						</button>
+						<button className="createGroup" onClick={joinGroup}>
+							Join a chat room
+						</button>
+						{groups.map((group) => (
+							<div key={group._id} onClick={() => setCurrentChat(group)}>
+								<Group
+									key={group._id}
+									currentUser={group.groupName}
+									group={group}
+								></Group>
 							</div>
 						))}
 					</div>

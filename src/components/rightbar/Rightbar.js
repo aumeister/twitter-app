@@ -83,15 +83,14 @@ export default function Rightbar({ user }) {
 						{followed ? <Remove></Remove> : <Add></Add>}
 					</button>
 				)}
-				{user.username !== currentUser.username && (
-					<button
-						className="rightbarFollowButton"
-						title="Start conversation"
-						onClick={startConversation}
-					>
-						<ChatBubble></ChatBubble>
-					</button>
-				)}
+				<button
+					className="rightbarFollowButton"
+					title="Start conversation"
+					onClick={startConversation}
+				>
+					<ChatBubble></ChatBubble>
+				</button>
+
 				<h4 className="rightbarTitle">User information title</h4>
 				<div className="rightbarInfo">
 					<div className="rightbarInfoItem">

@@ -15,10 +15,12 @@ export default function Sidebar() {
 						<Bookmarks></Bookmarks>
 						<span className="sidebarListItemText">Bookmarks</span>
 					</li>
-					<li className="sidebarListItem">
-						<Group></Group>
-						<span className="sidebarListItemText">Group</span>
-					</li>
+					<Link style={{ textDecoration: "none", color: "#000" }} to={"/group"}>
+						<li className="sidebarListItem">
+							<Group></Group>
+							<span className="sidebarListItemText">Group</span>
+						</li>
+					</Link>
 					<Link
 						style={{ textDecoration: "none", color: "#000" }}
 						to={"/messenger"}
