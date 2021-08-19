@@ -20,7 +20,6 @@ export default function Messenger() {
 	useEffect(() => {
 		socket.current = io("ws://localhost:8900");
 		socket.current.on("getGroupMessage", (data) => {
-			console.log(data)
 			setArrivalMessage({
 				sender: data.sender,
 				text: data.text,
