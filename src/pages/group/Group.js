@@ -20,8 +20,9 @@ export default function Messenger() {
 	useEffect(() => {
 		socket.current = io("ws://localhost:8900");
 		socket.current.on("getGroupMessage", (data) => {
+			console.log(data)
 			setArrivalMessage({
-				sender: data.senderId,
+				sender: data.sender,
 				text: data.text,
 				createdAt: Date.now(),
 			});
@@ -34,8 +35,8 @@ export default function Messenger() {
 	}, [arrivalMessage, currentChat]);
 
 	useEffect(() => {
-		socket.current.emit("addUser", user._id);
-	}, [user]);
+		socket.current.emit("Joined group", currentChat?._id)
+	}, [user, currentChat?._id]);
 
 	useEffect(() => {
 		const getGroups = async () => {
@@ -87,13 +88,9 @@ export default function Messenger() {
 		const message = {
 			sender: user._id,
 			text: newMessage,
-			coversationId: currentChat._id,
+			room: currentChat._id,
 		};
-		socket.current.emit("sendGroupMessage", {
-			sender: user._id,
-			text: newMessage,
-			group: currentChat,
-		});
+		socket.current.emit("sendGroupMessage", message);
 		try {
 			const res = await axios.post("/messages", message);
 			setMessages([...messages, res.data]);
