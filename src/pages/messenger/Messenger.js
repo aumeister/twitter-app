@@ -41,11 +41,7 @@ export default function Messenger() {
 	useEffect(() => {
 		const getConversations = async () => {
 			try {
-				const res = await axios.get("/conversations/" + user?._id, {
-					params: {
-						isGroup: false
-					}
-				});
+				const res = await axios.get("/conversations/" + user?._id);
 				setConversations(res.data);
 			} catch (err) {
 				console.log(err);
@@ -71,7 +67,7 @@ export default function Messenger() {
 		const message = {
 			sender: user._id,
 			text: newMessage,
-			coversationId: currentChat._id,
+			conversationId: currentChat._id,
 		};
 		const recieverId = currentChat.members.find(
 			(member) => member !== user._id

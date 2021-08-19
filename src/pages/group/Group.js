@@ -88,7 +88,7 @@ export default function Messenger() {
 		const message = {
 			sender: user._id,
 			text: newMessage,
-			room: currentChat._id,
+			conversationId: currentChat._id,
 		};
 		socket.current.emit("sendGroupMessage", message);
 		try {
