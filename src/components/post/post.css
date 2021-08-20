@@ -1,66 +1,77 @@
 .post {
-	width: 100%;
-	border-radius: 10px;
-	margin: 30px 0;
-	--webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
-	box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    width: 100%;
+    border-radius: 10px;
+    margin: 30px 0;
+    --webkit-box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
+    box-shadow: 0px 0px 16px -8px rgba(0, 0, 0, 0.68);
 }
 .postWrapper {
-	padding: 10px;
-	margin: 0 !important;
+    padding: 10px;
+    margin: 0 !important;
 }
 .postTop {
-	margin: 0 !important;
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+    margin: 0 !important;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 .postTopLeft {
-	display: flex;
-	align-items: center;
+    display: flex;
+    align-items: center;
 }
 .postProfileImg {
-	width: 32px;
-	height: 32px;
-	border-radius: 50%;
-	object-fit: cover;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 .postUsername {
-	font-size: 15px;
-	font-weight: 500;
-	margin: 0 10px;
+    font-size: 15px;
+    font-weight: 500;
+    margin: 0 10px;
 }
 .postDate {
-	font-size: 12px;
+    font-size: 12px;
 }
 .postCenter {
-	margin: 20px 0;
+    margin: 20px 0;
 }
 .postImg {
-	margin-top: 20px;
-	width: 100%;
-	max-height: 500px;
-	object-fit: contain;
+    margin-top: 20px;
+    width: 100%;
+    max-height: 500px;
+    object-fit: contain;
 }
 .postLikeIcon {
-	width: 25px;
-	margin-right: 10px;
-	cursor: pointer;
+    width: 25px;
+    margin-right: 10px;
+    cursor: pointer;
 }
 .postBottom {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 .postBottomLeft {
-	display: flex;
-	align-items: center;
+    display: flex;
+    align-items: center;
 }
 .postLikeCounter {
-	font-size: 15px;
+    font-size: 15px;
 }
 .postCommentText {
-	cursor: pointer;
-	border-bottom: 1px dashed gray;
-	font-size: 15px;
+    cursor: pointer;
+    border-bottom: 1px dashed gray;
+    font-size: 15px;
+}
+.postTopRight {
+    cursor: pointer;
+    position: relative;
+}
+.postTopRight span {
+    visibility: hidden;
+    transition: 0.1s ease;
+}
+.post:hover span {
+    visibility: visible;
 }

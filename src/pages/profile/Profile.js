@@ -17,7 +17,6 @@ export default function Profile() {
 
 	const changeProfileCover = async (e) => {
 		try {
-			console.log("cover");
 			const file = await handleFiles(e);
 			await axios.put("http://localhost:8080/api/users/" + user._id, {
 				userId: user._id,
@@ -30,7 +29,6 @@ export default function Profile() {
 	};
 	const changeProfileImg = async (e) => {
 		try {
-			console.log("profile");
 			const file = await handleFiles(e);
 			await axios.put("http://localhost:8080/api/users/" + user._id, {
 				userId: user._id,
